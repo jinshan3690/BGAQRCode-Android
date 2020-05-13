@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -13,6 +14,7 @@ import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -27,6 +29,7 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
     protected int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
     private PointF[] mLocationPoints;
     private Paint mPaint;
+    private Paint mBorderPaint;
     protected BarcodeType mBarcodeType = BarcodeType.HIGH_FREQUENCY;
     private long mLastPreviewFrameTime = 0;
     private ValueAnimator mAutoZoomAnimator;
@@ -71,9 +74,14 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
         layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, mCameraPreview.getId());
         addView(mScanBoxView, layoutParams);
 
-        mPaint = new Paint();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(getScanBoxView().getCornerColor());
         mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(0);
+        mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBorderPaint.setColor(Color.WHITE);
+        mBorderPaint.setStyle(Paint.Style.STROKE);
+        mBorderPaint.setStrokeWidth(dp2px(2.5f));
     }
 
     private void setOneShotPreviewCallback() {
@@ -432,9 +440,10 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
             return;
         }
 
-        for (PointF pointF : mLocationPoints) {
-            canvas.drawCircle(pointF.x, pointF.y, 10, mPaint);
-        }
+        float centerX = (mLocationPoints[1].x + mLocationPoints[3].x) / 2;
+        float centerY = (mLocationPoints[1].y + mLocationPoints[3].y) / 2;
+        canvas.drawCircle(centerX, centerY, dp2px(18f), mPaint);
+        canvas.drawCircle(centerX, centerY, dp2px(18f), mBorderPaint);
         mLocationPoints = null;
         postInvalidateDelayed(2000);
     }
@@ -451,6 +460,14 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
      */
     protected boolean isAutoZoom() {
         return mScanBoxView != null && mScanBoxView.isAutoZoom();
+    }
+
+    /**
+     * dp转px
+     */
+    public int dp2px( float dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, getContext().getResources().getDisplayMetrics());
     }
 
     protected boolean transformToViewCoordinates(final PointF[] pointArr, final Rect scanBoxAreaRect, final boolean isNeedAutoZoom, final String result) {
@@ -562,7 +579,7 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
     }
 
     private PointF transform(float originX, float originY, float cameraPreviewWidth, float cameraPreviewHeight, boolean isMirrorPreview, int statusBarHeight,
-            final Rect scanBoxAreaRect) {
+                             final Rect scanBoxAreaRect) {
         int viewWidth = getWidth();
         int viewHeight = getHeight();
 
@@ -578,7 +595,7 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
             result.x = viewWidth - result.x;
 
             if (scanBoxAreaRect == null) {
-                result.y += statusBarHeight;
+                result.x += statusBarHeight;
             }
         } else {
             scaleX = viewWidth / cameraPreviewWidth;
