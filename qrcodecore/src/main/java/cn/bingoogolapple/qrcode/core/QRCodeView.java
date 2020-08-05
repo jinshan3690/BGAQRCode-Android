@@ -599,6 +599,9 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
 
             if (scanBoxAreaRect == null) {
                 result.x += statusBarHeight;
+            }else{
+                result.x += statusBarHeight;
+                result.y += statusBarHeight;
             }
         } else {
             scaleX = viewWidth / cameraPreviewWidth;
