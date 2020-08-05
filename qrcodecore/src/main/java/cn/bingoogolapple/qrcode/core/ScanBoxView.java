@@ -306,41 +306,42 @@ public class ScanBoxView extends View {
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setColor(mCornerColor);
             mPaint.setStrokeWidth(mCornerSize);
+
             if (mCornerDisplayType == 1) {
-                canvas.drawLine(mFramingRect.left - mHalfCornerSize, mFramingRect.top, mFramingRect.left - mHalfCornerSize + mCornerLength, mFramingRect.top,
+                canvas.drawLine(mFramingRect.left - mHalfCornerSize + 1, mFramingRect.top, mFramingRect.left - mHalfCornerSize + mCornerLength, mFramingRect.top,
                         mPaint);
-                canvas.drawLine(mFramingRect.left, mFramingRect.top - mHalfCornerSize, mFramingRect.left, mFramingRect.top - mHalfCornerSize + mCornerLength,
+                canvas.drawLine(mFramingRect.left, mFramingRect.top - mHalfCornerSize  + 1, mFramingRect.left, mFramingRect.top - mHalfCornerSize + mCornerLength,
                         mPaint);
-                canvas.drawLine(mFramingRect.right + mHalfCornerSize, mFramingRect.top, mFramingRect.right + mHalfCornerSize - mCornerLength, mFramingRect.top,
+                canvas.drawLine(mFramingRect.right + mHalfCornerSize - 1, mFramingRect.top, mFramingRect.right + mHalfCornerSize - mCornerLength, mFramingRect.top,
                         mPaint);
-                canvas.drawLine(mFramingRect.right, mFramingRect.top - mHalfCornerSize, mFramingRect.right, mFramingRect.top - mHalfCornerSize + mCornerLength,
+                canvas.drawLine(mFramingRect.right, mFramingRect.top - mHalfCornerSize + 1, mFramingRect.right, mFramingRect.top - mHalfCornerSize + mCornerLength,
                         mPaint);
 
-                canvas.drawLine(mFramingRect.left - mHalfCornerSize, mFramingRect.bottom, mFramingRect.left - mHalfCornerSize + mCornerLength,
+                canvas.drawLine(mFramingRect.left - mHalfCornerSize + 1, mFramingRect.bottom, mFramingRect.left - mHalfCornerSize + mCornerLength,
                         mFramingRect.bottom, mPaint);
-                canvas.drawLine(mFramingRect.left, mFramingRect.bottom + mHalfCornerSize, mFramingRect.left,
+                canvas.drawLine(mFramingRect.left, mFramingRect.bottom + mHalfCornerSize - 1, mFramingRect.left,
                         mFramingRect.bottom + mHalfCornerSize - mCornerLength, mPaint);
-                canvas.drawLine(mFramingRect.right + mHalfCornerSize, mFramingRect.bottom, mFramingRect.right + mHalfCornerSize - mCornerLength,
+                canvas.drawLine(mFramingRect.right + mHalfCornerSize - 1, mFramingRect.bottom, mFramingRect.right + mHalfCornerSize - mCornerLength,
                         mFramingRect.bottom, mPaint);
-                canvas.drawLine(mFramingRect.right, mFramingRect.bottom + mHalfCornerSize, mFramingRect.right,
+                canvas.drawLine(mFramingRect.right, mFramingRect.bottom + mHalfCornerSize - 1, mFramingRect.right,
                         mFramingRect.bottom + mHalfCornerSize - mCornerLength, mPaint);
             } else if (mCornerDisplayType == 2) {
-                canvas.drawLine(mFramingRect.left, mFramingRect.top + mHalfCornerSize, mFramingRect.left + mCornerLength, mFramingRect.top + mHalfCornerSize,
+                canvas.drawLine(mFramingRect.left - 2, mFramingRect.top + mHalfCornerSize - 2, mFramingRect.left + mCornerLength, mFramingRect.top + mHalfCornerSize - 2,
                         mPaint);
-                canvas.drawLine(mFramingRect.left + mHalfCornerSize, mFramingRect.top, mFramingRect.left + mHalfCornerSize, mFramingRect.top + mCornerLength,
+                canvas.drawLine(mFramingRect.left + mHalfCornerSize - 2, mFramingRect.top - 2, mFramingRect.left + mHalfCornerSize - 2, mFramingRect.top + mCornerLength,
                         mPaint);
-                canvas.drawLine(mFramingRect.right, mFramingRect.top + mHalfCornerSize, mFramingRect.right - mCornerLength, mFramingRect.top + mHalfCornerSize,
+                canvas.drawLine(mFramingRect.right + 2, mFramingRect.top + mHalfCornerSize - 2, mFramingRect.right - mCornerLength, mFramingRect.top + mHalfCornerSize - 2,
                         mPaint);
-                canvas.drawLine(mFramingRect.right - mHalfCornerSize, mFramingRect.top, mFramingRect.right - mHalfCornerSize, mFramingRect.top + mCornerLength,
+                canvas.drawLine(mFramingRect.right - mHalfCornerSize + 2, mFramingRect.top - 2, mFramingRect.right - mHalfCornerSize + 2, mFramingRect.top + mCornerLength,
                         mPaint);
 
-                canvas.drawLine(mFramingRect.left, mFramingRect.bottom - mHalfCornerSize, mFramingRect.left + mCornerLength,
-                        mFramingRect.bottom - mHalfCornerSize, mPaint);
-                canvas.drawLine(mFramingRect.left + mHalfCornerSize, mFramingRect.bottom, mFramingRect.left + mHalfCornerSize,
+                canvas.drawLine(mFramingRect.left - 2, mFramingRect.bottom - mHalfCornerSize + 2, mFramingRect.left + mCornerLength,
+                        mFramingRect.bottom - mHalfCornerSize + 2, mPaint);
+                canvas.drawLine(mFramingRect.left + mHalfCornerSize - 2, mFramingRect.bottom + 2, mFramingRect.left + mHalfCornerSize - 2,
                         mFramingRect.bottom - mCornerLength, mPaint);
-                canvas.drawLine(mFramingRect.right, mFramingRect.bottom - mHalfCornerSize, mFramingRect.right - mCornerLength,
-                        mFramingRect.bottom - mHalfCornerSize, mPaint);
-                canvas.drawLine(mFramingRect.right - mHalfCornerSize, mFramingRect.bottom, mFramingRect.right - mHalfCornerSize,
+                canvas.drawLine(mFramingRect.right + 2, mFramingRect.bottom - mHalfCornerSize + 2, mFramingRect.right - mCornerLength,
+                        mFramingRect.bottom - mHalfCornerSize + 2, mPaint);
+                canvas.drawLine(mFramingRect.right - mHalfCornerSize + 2, mFramingRect.bottom + 2, mFramingRect.right - mHalfCornerSize + 2,
                         mFramingRect.bottom - mCornerLength, mPaint);
             }
         }
