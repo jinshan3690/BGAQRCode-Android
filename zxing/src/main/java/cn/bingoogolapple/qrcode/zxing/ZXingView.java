@@ -95,7 +95,26 @@ public class ZXingView extends QRCodeView {
                 source = new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
             }
 
-            rawResult = mMultiFormatReader.decodeWithState(new BinaryBitmap(new GlobalHistogramBinarizer(source)));
+            try {
+                rawResult = mMultiFormatReader.decodeWithState(new BinaryBitmap(new GlobalHistogramBinarizer(source)));
+            } catch (Exception e) {
+//            if (mIsPortrait) {
+//                if (scanBoxAreaRect == null) {
+//                    byte[] mData = data;
+//                    data = new byte[mData.length];
+//                    for (int y = 0; y < height; y++) {
+//                        for (int x = 0; x < width; x++) {
+//                            data[x * height + height - y - 1] = mData[x + y * width];
+//                        }
+//                    }
+//                    int tmp = width;
+//                    width = height;
+//                    height = tmp;
+//                    source = new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
+//            }
+//                }
+            }
+
             if (rawResult == null) {
                 rawResult = mMultiFormatReader.decodeWithState(new BinaryBitmap(new HybridBinarizer(source)));
                 if (rawResult != null) {

@@ -443,6 +443,10 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
         for (PointF pointF : mLocationPoints) {
             canvas.drawCircle(pointF.x, pointF.y, 10, mPaint);
         }
+//        float centerX = (mLocationPoints[1].x + mLocationPoints[3].x) / 2;
+//        float centerY = (mLocationPoints[1].y + mLocationPoints[3].y) / 2;
+//        canvas.drawCircle(centerX, centerY, dp2px(18f), mPaint);
+//        canvas.drawCircle(centerX, centerY, dp2px(18f), mBorderPaint);
         mLocationPoints = null;
         postInvalidateDelayed(2000);
     }
